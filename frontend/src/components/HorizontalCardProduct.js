@@ -4,6 +4,7 @@ import displayINRCurrency from '../helpers/displayCurrency'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
 import addToCart from '../helpers/addToCart'
+import getImageSrc from '../helpers/getImageSrc'
 import Context from '../context'
 
 const HorizontalCardProduct = ({category, heading}) => {
@@ -33,7 +34,7 @@ const HorizontalCardProduct = ({category, heading}) => {
 
     useEffect(()=>{
         fetchData()
-    },[])
+        },[category])
 
     const scrollRight = () =>{
         scrollElement.current.scrollLeft += 300
@@ -78,7 +79,7 @@ const HorizontalCardProduct = ({category, heading}) => {
                 return(
                     <Link to={"product/"+product?._id} className='w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow flex'>
                         <div className='bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px]'>
-                            <img src={product.productImage[0]} className='object-scale-down h-full hover:scale-110 transition-all'/>
+                            <img src={getImageSrc(product?.productImage?.[0], product?.category)} alt={product?.productName || product?.category || 'product'} className='object-scale-down h-full hover:scale-110 transition-all'/>
                         </div>
                         <div className='p-4 grid'>
                             <h2 className='font-medium text-base md:text-lg text-ellipsis line-clamp-1 text-black'>{product?.productName}</h2>

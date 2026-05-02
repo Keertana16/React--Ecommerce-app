@@ -5,6 +5,7 @@ import { FaStar } from "react-icons/fa";
 import { FaStarHalf } from "react-icons/fa";
 import displayINRCurrency from '../helpers/displayCurrency';
 import VerticalCardProduct from '../components/VerticalCardProduct';
+import getImageSrc from '../helpers/getImageSrc'
 import CategroyWiseProductDisplay from '../components/CategoryWiseProductDisplay';
 import addToCart from '../helpers/addToCart';
 import Context from '../context';
@@ -49,7 +50,7 @@ const ProductDetails = () => {
     const dataReponse = await response.json()
 
     setData(dataReponse?.data)
-    setActiveImage(dataReponse?.data?.productImage[0])
+    setActiveImage(getImageSrc(dataReponse?.data?.productImage?.[0], dataReponse?.data?.category))
 
   }
 
@@ -142,10 +143,10 @@ const ProductDetails = () => {
                     ) : (
                       <div className='flex gap-2 lg:flex-col overflow-scroll scrollbar-none h-full'>
                         {
-                          data?.productImage?.map((imgURL,index) =>{
+                            data?.productImage?.map((imgURL,index) =>{
                             return(
                               <div className='h-20 w-20 bg-slate-200 rounded p-1' key={imgURL}>
-                                <img src={imgURL} className='w-full h-full object-scale-down mix-blend-multiply cursor-pointer' onMouseEnter={()=>handleMouseEnterProduct(imgURL)}  onClick={()=>handleMouseEnterProduct(imgURL)}/>
+                                <img src={getImageSrc(imgURL, data?.category)} className='w-full h-full object-scale-down mix-blend-multiply cursor-pointer' onMouseEnter={()=>handleMouseEnterProduct(getImageSrc(imgURL, data?.category))}  onClick={()=>handleMouseEnterProduct(getImageSrc(imgURL, data?.category))}/>
                               </div>
                             )
                           })

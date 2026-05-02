@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import scrollTop from '../helpers/scrollTop'
 import displayINRCurrency from '../helpers/displayCurrency'
+import getImageSrc from '../helpers/getImageSrc'
 import Context from '../context'
 import addToCart from '../helpers/addToCart'
 import { Link } from 'react-router-dom'
@@ -41,7 +42,7 @@ const VerticalCard = ({loading,data = []}) => {
                  return(
                      <Link to={"/product/"+product?._id} className='w-full min-w-[280px]  md:min-w-[300px] max-w-[280px] md:max-w-[300px]  bg-white rounded-sm shadow ' onClick={scrollTop}>
                          <div className='bg-slate-200 h-48 p-4 min-w-[280px] md:min-w-[145px] flex justify-center items-center'>
-                             <img src={product?.productImage[0]} className='object-scale-down h-full hover:scale-110 transition-all mix-blend-multiply'/>
+                             <img src={getImageSrc(product?.productImage?.[0], product?.category)} alt={product?.productName || product?.category || 'product'} className='object-scale-down h-full hover:scale-110 transition-all mix-blend-multiply'/>
                          </div>
                          <div className='p-4 grid gap-3'>
                              <h2 className='font-medium text-base md:text-lg text-ellipsis line-clamp-1 text-black'>{product?.productName}</h2>
